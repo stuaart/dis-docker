@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>COMP4039 - Javascript demonstrations</title>
+    <link rel="stylesheet" href="../css/mvp.css">
+  </head>
+  <body>
+    <h1>Variables, Arrays, Arithmetic</h1>
+    <div id="result">Result goes here</div>
+
+    <script>
+       	var a = 10, b = 3.5344, c = "Hello world", x = "5.33";
+       
+       	var d = [34, 1, 5, 21, 3, 1, 8, 13, 2, 0];
+       
+       	var e = {a: "hello", b: "world", c: 100}; // Object (~=JSON)
+       	e[d] = d;
+       	e[f] = a;
+       
+       	var f = Array.from(d);
+       	f.sort();
+       
+       	var g = null;
+       	g = d.concat(e) // oh look I missed a semicolon
+
+       	elem = document.getElementById("result"); // Did I declare elem??
+       	elem.innerHTML = "array d=" + d + " f=" + f;
+       	elem.insertAdjacentHTML('beforeend', "<br/>" + (a + b) + c);
+       	elem.insertAdjacentHTML('beforeend', "<br/>array g = " + g)
+       	elem.insertAdjacentHTML('beforeend', "<br/>array g = " + JSON.stringify(g));
+       	elem.insertAdjacentHTML('beforeend', "<br/>b=" + parseInt(b) + "; x+b=" + (parseFloat(x)+b));
+       	{
+       		const a = 20;
+       		let b = 5; // var is function scoped and let is block scoped
+	       	elem.insertAdjacentHTML('beforeend', "<br/>const a = " + a + ", let b = " + b);
+
+       	}
+       	elem.insertAdjacentHTML('beforeend', "<br/>a = " + a + ", b = " + b);
+
+       	console.log("array g = " + JSON.stringify(g))
+
+        elem.insertAdjacentHTML('beforeend', "<br/>typeof(a) = " + typeof(a) + 
+          ", typeof(e) = " + typeof(e));
+
+
+    </script>
+
+
+  </body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>COMP4039 - Javascript demonstrations</title>
+    <link rel="stylesheet" href="../css/mvp.css">
+    
+    <script>
+        function product(a, b) {
+            ans = a * b;
+            return ans; 
+        }
+        
+        function doStuff(a, b) {
+            document.getElementById("output1").innerHTML = "Answer: " + product(a,b); 
+        }
+
+        function whenDone(message)
+        {
+            document.getElementById("output2").innerHTML = message;
+        }
+
+        function wait(ms) // from http://www.endmemo.com/js/pause.php
+        {
+            var d = new Date();
+            var d2 = null;
+            do { d2 = new Date(); }
+            while(d2-d < ms);
+        }
+
+        function triggerProcess(msg, myCallback)
+        {
+            wait(4000); // BLOCKING!
+            myCallback(msg);
+        }
+
+    </script>
+</head>
+
+  <body>
+    <h1>Events</h1>
+    
+    <button onclick="doStuff(3, 7)">Click Me</button>
+
+    <div id="output1">Awaiting buttong event</div>
+
+    <br/>
+
+    <button onclick="triggerProcess('Put a fork in me, I am done', whenDone)">Click Me</button>
+
+    <div id="output2">Awaiting callback</div>
+
+    <br/>
+
+    Enter text to change: <input type="text" id="fname">
+
+    <script>
+                document.getElementById("fname").addEventListener("change", myFunction);
+
+        function myFunction() { // see https://www.w3schools.com/jsref/event_onchange.asp
+            var x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+
+
+    <br/>
+
+    <span id="myspan">Click me</span>
+
+    <script type="text/javascript">
+        var myspan = document.getElementById("myspan");
+        myspan.onclick = function() { alert ("hi"); }; // anon function
+    </script>
+
+
+  </body>
+</html>

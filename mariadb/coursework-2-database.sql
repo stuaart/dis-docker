@@ -1,4 +1,4 @@
-/* Database for use with DIS-COMP4039 Coursework 2 
+/* Database for use with COMP4039-DIS Coursework 2 
  * 
  * Please note you do not have to use this.  If you find
  * it easier to use a database of your own design then
@@ -9,7 +9,12 @@
  * modifying it to some extent.
  */
 
-CREATE DATABASE IF NOT EXISTS `testdb` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE DATABASE IF NOT EXISTS `coursework2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `coursework2`;
 
 DROP TABLE IF EXISTS Fines;

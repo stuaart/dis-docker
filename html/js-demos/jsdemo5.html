@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>COMP4039 - Javascript demonstrations</title>
+    <link rel="stylesheet" href="../css/mvp.css">
+    
+    <script type="text/javascript">
+        function Car(make, model, colour)
+        {
+            this.make = make;
+            this.model = model;
+            this.colour = colour;
+        }
+        
+        Car.prototype.setMake = function (make)
+        {
+            this.make = make;
+        };
+        Car.prototype.getModel = function()
+        { 
+            return this.model
+        };
+        
+        var car1 = new Car("Honda", "Civic", "Red");
+        car1.plate = "ABC123";
+ 
+        var car2 = new Car("Fiat", "Panda", "Blue");
+        car2.getColour = function() { return this.colour; };
+
+
+        class ClassyCar
+        {
+
+            model = "no model";
+
+            constructor(make, model, colour)
+            {
+                this.make = make;
+                this.model = model;
+                this.colour = colour;
+            }
+
+            drive()
+            {
+                console.log("Driving car");
+            }
+
+            set model(model) // getters / setters cannot take multiple arguments!
+            {
+                this.model = model;
+            }
+
+            get model()
+            {
+                return this.model;
+            }
+        }
+
+        var car3 = new ClassyCar("Audi", "A3", "Black");
+        car3.model = "BMW";
+
+    </script>
+</head>
+
+  <body>
+    <h1>Functions and objects</h1>
+    <div id="output"></div>
+
+    <script>
+        
+        var myFunc = function(msg) { alert(msg); };
+
+        try
+        {
+
+            document.getElementById("output").innerHTML = 
+                "car1.plate=" + car1.plate + "<br/>"
+                + "car1.getModel=" + car1.getModel() + "<br/>"
+                + "car2.getColour()=" + car2.getColour() + "<br/>"
+                //+ "car1.getColour()=" + car1.getColour() + "<br/>"
+                + "car2.plate=" + car2.plate;
+        }
+        catch (err)
+        {
+            console.log("error encountered: " + err)
+        }
+
+        document.getElementById("output").insertAdjacentHTML('beforeend', car3.model);
+
+    </script>
+
+    <button onclick="myFunc('hello world')">Click Me</button>
+
+
+  </body>
+</html>

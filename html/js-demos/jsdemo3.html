@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>COMP4039 - Javascript demonstrations</title>
+    <link rel="stylesheet" href="../css/mvp.css">
+
+    <script>
+
+        function start() 
+        {
+
+            var myul = document.getElementById("myul");
+            var newli = document.createElement('li');
+            newli.innerHTML = "new item here";
+
+            myul.appendChild(newli);
+        }
+
+    </script>
+</head>
+
+  <body onload="start()">
+    <h1>DOM stuff</h1>
+    
+
+    <ul id="myul">
+        <li>item 1</li>
+        <li>item 2</li>
+        <li>item 3</li>
+        <li>item 4</li>
+    </ul>
+
+  </body>
+</html>
