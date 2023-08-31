@@ -62,13 +62,12 @@ INSERT INTO Offence (Offence_ID, Offence_description, Offence_maxFine, Offence_m
 (4, 'Illegal parking', 500, 0),
 (5, 'Drink driving', 10000, 11),
 (6, 'Driving without a licence', 10000, 0),
-(7, 'Driving without a licence', 10000, 0),
-(8, 'Traffic light offences', 1000, 3),
-(9, 'Cycling on pavement', 500, 0),
-(10, 'Failure to have control of vehicle', 1000, 3),
-(11, 'Dangerous driving', 1000, 11),
-(12, 'Careless driving', 5000, 6),
-(13, 'Dangerous cycling', 2500, 0);
+(7, 'Traffic light offences', 1000, 3),
+(8, 'Cycling on pavement', 500, 0),
+(9, 'Failure to have control of vehicle', 1000, 3),
+(10, 'Dangerous driving', 1000, 11),
+(11, 'Careless driving', 5000, 6),
+(12, 'Dangerous cycling', 2500, 0);
 
 DROP TABLE IF EXISTS Ownership;
 CREATE TABLE Ownership (
