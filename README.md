@@ -4,7 +4,7 @@
 
 Docker files for COMP4039-DIS (Databases, Interfaces and Software Design Principles) L4 module.
 
-Contains the principle components of the standard LAMP (Linux, Apache, MySQL, PHP) stack:
+Contains the principal components of the standard LAMP (Linux, Apache, MySQL, PHP) stack:
 - apache2 (web server)
 - mariadb v10 (OSS MySQL server)
 - php v8
