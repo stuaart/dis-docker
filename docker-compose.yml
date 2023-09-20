@@ -35,7 +35,6 @@ services:
       PMA_HOST: mariadb
       PMA_USER: root
       PMA_PASSWORD: rootpwd
-    restart: always
     ports:
       - 8081:80
 
