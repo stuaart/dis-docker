@@ -14,22 +14,16 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 CREATE DATABASE IF NOT EXISTS `coursework2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `coursework2`;
 
 DROP TABLE IF EXISTS `Fines`;
 CREATE TABLE `Fines` (
-  `Fine_ID` int(11) NOT NULL,
+  `Fine_ID` int(11) NOT NULL PRIMARY KEY,
   `Fine_Amount` int(11) NOT NULL,
   `Fine_Points` int(11) NOT NULL,
   `Incident_ID` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `Fines` (`Fine_ID`, `Fine_Amount`, `Fine_Points`, `Incident_ID`) VALUES
 (1, 2000, 6, 3),
@@ -38,14 +32,13 @@ INSERT INTO `Fines` (`Fine_ID`, `Fine_Amount`, `Fine_Points`, `Incident_ID`) VAL
 
 DROP TABLE IF EXISTS `Incident`;
 CREATE TABLE `Incident` (
-  `Incident_ID` int(11) NOT NULL,
+  `Incident_ID` int(11) NOT NULL PRIMARY KEY,
   `Vehicle_ID` int(11) DEFAULT NULL,
   `People_ID` int(11) DEFAULT NULL,
   `Incident_Date` date NOT NULL,
   `Incident_Report` varchar(500) NOT NULL,
   `Offence_ID` int(11) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `Incident` (`Incident_ID`, `Vehicle_ID`, `People_ID`, `Incident_Date`, `Incident_Report`, `Offence_ID`) VALUES
 (1, 15, 4, '2017-12-01', '40mph in a 30 limit', 1),
@@ -56,12 +49,11 @@ INSERT INTO `Incident` (`Incident_ID`, `Vehicle_ID`, `People_ID`, `Incident_Date
 
 DROP TABLE IF EXISTS `Offence`;
 CREATE TABLE `Offence` (
-  `Offence_ID` int(11) NOT NULL,
+  `Offence_ID` int(11) NOT NULL PRIMARY KEY,
   `Offence_description` varchar(50) NOT NULL,
   `Offence_maxFine` int(11) NOT NULL,
   `Offence_maxPoints` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `Offence` (`Offence_ID`, `Offence_description`, `Offence_maxFine`, `Offence_maxPoints`) VALUES
 (1, 'Speeding', 1000, 3),
@@ -81,8 +73,7 @@ DROP TABLE IF EXISTS `Ownership`;
 CREATE TABLE `Ownership` (
   `People_ID` int(11) NOT NULL,
   `Vehicle_ID` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `Ownership` (`People_ID`, `Vehicle_ID`) VALUES
 (3, 12),
@@ -97,12 +88,11 @@ INSERT INTO `Ownership` (`People_ID`, `Vehicle_ID`) VALUES
 
 DROP TABLE IF EXISTS `People`;
 CREATE TABLE `People` (
-  `People_ID` int(11) NOT NULL,
+  `People_ID` int(11) NOT NULL PRIMARY KEY,
   `People_name` varchar(50) NOT NULL,
   `People_address` varchar(50) DEFAULT NULL,
   `People_licence` varchar(16) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `People` (`People_ID`, `People_name`, `People_address`, `People_licence`) VALUES
 (1, 'James Smith', '23 Barnsdale Road, Leicester', 'SMITH92LDOFJJ829'),
@@ -117,12 +107,11 @@ INSERT INTO `People` (`People_ID`, `People_name`, `People_address`, `People_lice
 
 DROP TABLE IF EXISTS `Vehicle`;
 CREATE TABLE `Vehicle` (
-  `Vehicle_ID` int(11) NOT NULL,
+  `Vehicle_ID` int(11) NOT NULL PRIMARY KEY,
   `Vehicle_type` varchar(20) NOT NULL,
   `Vehicle_colour` varchar(20) NOT NULL,
   `Vehicle_licence` varchar(7) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
-#ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 INSERT INTO `Vehicle` (`Vehicle_ID`, `Vehicle_type`, `Vehicle_colour`, `Vehicle_licence`) VALUES
 (12, 'Ford Fiesta', 'Blue', 'LB15AJL'),
@@ -137,43 +126,10 @@ INSERT INTO `Vehicle` (`Vehicle_ID`, `Vehicle_type`, `Vehicle_colour`, `Vehicle_
 (22, 'Hyundai i30', 'Grey', 'AD223NG');
 
 
-ALTER TABLE `Fines`
-  ADD PRIMARY KEY (`Fine_ID`),
-  ADD KEY `Incident_ID` (`Incident_ID`);
-
-ALTER TABLE `Incident`
-  ADD PRIMARY KEY (`Incident_ID`),
-  ADD KEY `fk_incident_vehicle` (`Vehicle_ID`),
-  ADD KEY `fk_incident_people` (`People_ID`),
-  ADD KEY `fk_incident_offence` (`Offence_ID`);
-
-ALTER TABLE `Offence`
-  ADD PRIMARY KEY (`Offence_ID`);
-
-ALTER TABLE `Ownership`
-  ADD KEY `fk_people` (`People_ID`),
-  ADD KEY `fk_vehicle` (`Vehicle_ID`);
-
-ALTER TABLE `People`
-  ADD PRIMARY KEY (`People_ID`);
-
-ALTER TABLE `Vehicle`
-  ADD PRIMARY KEY (`Vehicle_ID`);
-
+SET FOREIGN_KEY_CHECKS=0;
 
 ALTER TABLE `Fines`
-  MODIFY `Fine_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-ALTER TABLE `Incident`
-  MODIFY `Incident_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-ALTER TABLE `Offence`
-  MODIFY `Offence_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-ALTER TABLE `People`
-  MODIFY `People_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-ALTER TABLE `Vehicle`
-  MODIFY `Vehicle_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
-ALTER TABLE `Fines`
-  ADD CONSTRAINT `fk_fines` FOREIGN KEY (`Incident_ID`) REFERENCES `Incident` (`Incident_ID`);
+  ADD CONSTRAINT `fk_fines_incident` FOREIGN KEY (`Incident_ID`) REFERENCES `Incident` (`Incident_ID`);
 
 ALTER TABLE `Incident`
   ADD CONSTRAINT `fk_incident_offence` FOREIGN KEY (`Offence_ID`) REFERENCES `Offence` (`Offence_ID`),
@@ -181,6 +137,13 @@ ALTER TABLE `Incident`
   ADD CONSTRAINT `fk_incident_vehicle` FOREIGN KEY (`Vehicle_ID`) REFERENCES `Vehicle` (`Vehicle_ID`);
 
 ALTER TABLE `Ownership`
-  ADD CONSTRAINT `fk_person` FOREIGN KEY (`People_ID`) REFERENCES `People` (`People_ID`),
-  ADD CONSTRAINT `fk_vehicle` FOREIGN KEY (`Vehicle_ID`) REFERENCES `Vehicle` (`Vehicle_ID`);
+  ADD CONSTRAINT `fk_ownership_people` FOREIGN KEY (`People_ID`) REFERENCES `People` (`People_ID`),
+  ADD CONSTRAINT `fk_ownership_vehicle` FOREIGN KEY (`Vehicle_ID`) REFERENCES `Vehicle` (`Vehicle_ID`);
 
+SET FOREIGN_KEY_CHECKS=1;
+
+ALTER TABLE `Fines` AUTO_INCREMENT = 4;
+ALTER TABLE `Incident` AUTO_INCREMENT = 6;
+ALTER TABLE `Offence` AUTO_INCREMENT = 13;
+ALTER TABLE `People` AUTO_INCREMENT = 10;
+ALTER TABLE `Vehicle` AUTO_INCREMENT = 23;
