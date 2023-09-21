@@ -8,37 +8,76 @@
  * You will not be able to complete the coursework without 
  * modifying it to some extent.
  */
-
+ 
+-- Host: mariadb
+-- Generation Time: Sep 21, 2023 at 12:46 PM
+-- Server version: 10.8.8-MariaDB-1:10.8.8+maria~ubu2204
+-- PHP Version: 8.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `coursework2`
+--
 CREATE DATABASE IF NOT EXISTS `coursework2` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `coursework2`;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Fines`
+--
+
 DROP TABLE IF EXISTS `Fines`;
-CREATE TABLE `Fines` (
-  `Fine_ID` int(11) NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `Fines` (
+  `Fine_ID` int(11) NOT NULL,
   `Fine_Amount` int(11) NOT NULL,
   `Fine_Points` int(11) NOT NULL,
-  `Incident_ID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `Incident_ID` int(11) NOT NULL,
+  PRIMARY KEY (`Fine_ID`),
+  KEY `fk_fines_incident` (`Incident_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Fines`
+--
 
 INSERT INTO `Fines` (`Fine_ID`, `Fine_Amount`, `Fine_Points`, `Incident_ID`) VALUES
 (1, 2000, 6, 3),
 (2, 50, 0, 2),
 (3, 500, 3, 4);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Incident`
+--
+
 DROP TABLE IF EXISTS `Incident`;
-CREATE TABLE `Incident` (
-  `Incident_ID` int(11) NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `Incident` (
+  `Incident_ID` int(11) NOT NULL,
   `Vehicle_ID` int(11) DEFAULT NULL,
   `People_ID` int(11) DEFAULT NULL,
   `Incident_Date` date NOT NULL,
   `Incident_Report` varchar(500) NOT NULL,
-  `Offence_ID` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `Offence_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Incident_ID`),
+  KEY `fk_incident_offence` (`Offence_ID`),
+  KEY `fk_incident_people` (`People_ID`),
+  KEY `fk_incident_vehicle` (`Vehicle_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Incident`
+--
 
 INSERT INTO `Incident` (`Incident_ID`, `Vehicle_ID`, `People_ID`, `Incident_Date`, `Incident_Report`, `Offence_ID`) VALUES
 (1, 15, 4, '2017-12-01', '40mph in a 30 limit', 1),
@@ -47,13 +86,24 @@ INSERT INTO `Incident` (`Incident_ID`, `Vehicle_ID`, `People_ID`, `Incident_Date
 (4, 14, 2, '2017-08-22', 'Failure to stop at a red light - travelling 25mph', 8),
 (5, 13, 4, '2017-10-17', 'Not wearing a seatbelt on the M1', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Offence`
+--
+
 DROP TABLE IF EXISTS `Offence`;
-CREATE TABLE `Offence` (
-  `Offence_ID` int(11) NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `Offence` (
+  `Offence_ID` int(11) NOT NULL,
   `Offence_description` varchar(50) NOT NULL,
   `Offence_maxFine` int(11) NOT NULL,
-  `Offence_maxPoints` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `Offence_maxPoints` int(11) NOT NULL,
+  PRIMARY KEY (`Offence_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Offence`
+--
 
 INSERT INTO `Offence` (`Offence_ID`, `Offence_description`, `Offence_maxFine`, `Offence_maxPoints`) VALUES
 (1, 'Speeding', 1000, 3),
@@ -69,11 +119,23 @@ INSERT INTO `Offence` (`Offence_ID`, `Offence_description`, `Offence_maxFine`, `
 (11, 'Careless driving', 5000, 6),
 (12, 'Dangerous cycling', 2500, 0);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Ownership`
+--
+
 DROP TABLE IF EXISTS `Ownership`;
-CREATE TABLE `Ownership` (
+CREATE TABLE IF NOT EXISTS `Ownership` (
   `People_ID` int(11) NOT NULL,
-  `Vehicle_ID` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `Vehicle_ID` int(11) NOT NULL,
+  KEY `fk_ownership_people` (`People_ID`),
+  KEY `fk_ownership_vehicle` (`Vehicle_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Ownership`
+--
 
 INSERT INTO `Ownership` (`People_ID`, `Vehicle_ID`) VALUES
 (3, 12),
@@ -86,13 +148,24 @@ INSERT INTO `Ownership` (`People_ID`, `Vehicle_ID`) VALUES
 (6, 18),
 (7, 21);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `People`
+--
+
 DROP TABLE IF EXISTS `People`;
-CREATE TABLE `People` (
-  `People_ID` int(11) NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `People` (
+  `People_ID` int(11) NOT NULL,
   `People_name` varchar(50) NOT NULL,
   `People_address` varchar(50) DEFAULT NULL,
-  `People_licence` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `People_licence` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`People_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `People`
+--
 
 INSERT INTO `People` (`People_ID`, `People_name`, `People_address`, `People_licence`) VALUES
 (1, 'James Smith', '23 Barnsdale Road, Leicester', 'SMITH92LDOFJJ829'),
@@ -105,13 +178,24 @@ INSERT INTO `People` (`People_ID`, `People_name`, `People_address`, `People_lice
 (8, 'Angela Smith', '30 Avenue Road, Grantham', 'SMITH222LE9FJ5DS'),
 (9, 'Xene Medora', '22 House Drive, West Bridgford', 'MEDORH914ANBB223');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Vehicle`
+--
+
 DROP TABLE IF EXISTS `Vehicle`;
-CREATE TABLE `Vehicle` (
-  `Vehicle_ID` int(11) NOT NULL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS `Vehicle` (
+  `Vehicle_ID` int(11) NOT NULL,
   `Vehicle_type` varchar(20) NOT NULL,
   `Vehicle_colour` varchar(20) NOT NULL,
-  `Vehicle_licence` varchar(7) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+  `Vehicle_licence` varchar(7) DEFAULT NULL,
+  PRIMARY KEY (`Vehicle_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `Vehicle`
+--
 
 INSERT INTO `Vehicle` (`Vehicle_ID`, `Vehicle_type`, `Vehicle_colour`, `Vehicle_licence`) VALUES
 (12, 'Ford Fiesta', 'Blue', 'LB15AJL'),
@@ -125,25 +209,32 @@ INSERT INTO `Vehicle` (`Vehicle_ID`, `Vehicle_type`, `Vehicle_colour`, `Vehicle_
 (21, 'Renault Scenic', 'Silver', 'BC16OEA'),
 (22, 'Hyundai i30', 'Grey', 'AD223NG');
 
+--
+-- Constraints for dumped tables
+--
 
-SET FOREIGN_KEY_CHECKS=0;
-
+--
+-- Constraints for table `Fines`
+--
 ALTER TABLE `Fines`
   ADD CONSTRAINT `fk_fines_incident` FOREIGN KEY (`Incident_ID`) REFERENCES `Incident` (`Incident_ID`);
 
+--
+-- Constraints for table `Incident`
+--
 ALTER TABLE `Incident`
   ADD CONSTRAINT `fk_incident_offence` FOREIGN KEY (`Offence_ID`) REFERENCES `Offence` (`Offence_ID`),
   ADD CONSTRAINT `fk_incident_people` FOREIGN KEY (`People_ID`) REFERENCES `People` (`People_ID`),
   ADD CONSTRAINT `fk_incident_vehicle` FOREIGN KEY (`Vehicle_ID`) REFERENCES `Vehicle` (`Vehicle_ID`);
 
+--
+-- Constraints for table `Ownership`
+--
 ALTER TABLE `Ownership`
   ADD CONSTRAINT `fk_ownership_people` FOREIGN KEY (`People_ID`) REFERENCES `People` (`People_ID`),
   ADD CONSTRAINT `fk_ownership_vehicle` FOREIGN KEY (`Vehicle_ID`) REFERENCES `Vehicle` (`Vehicle_ID`);
+COMMIT;
 
-SET FOREIGN_KEY_CHECKS=1;
-
-ALTER TABLE `Fines` AUTO_INCREMENT = 4;
-ALTER TABLE `Incident` AUTO_INCREMENT = 6;
-ALTER TABLE `Offence` AUTO_INCREMENT = 13;
-ALTER TABLE `People` AUTO_INCREMENT = 10;
-ALTER TABLE `Vehicle` AUTO_INCREMENT = 23;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
