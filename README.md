@@ -45,3 +45,13 @@ If for whatever reason you want to delete your database and rebuild from the SQL
 again.
 
 
+## Specific OS-related notes
+
+If you are installing Docker for Windows, you may need to install the Windows Subsystem for Linux (WSL). You will either be told to do so or you might encounter an error related to "WSL kernel version too low" or similar. In either case you will need to run cmd.exe and the following commands:
+
+	wsl --install
+	wsl --update
+
+If you are installing Docker for macOS, some have encountered errors where Docker Desktop won't start. In which case try some of the following:
+
+	https://mattsimpson.ca/2022/12/27/docker-desktop-for-mac-wont-start
