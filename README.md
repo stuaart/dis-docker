@@ -47,10 +47,17 @@ again.
 
 ## Specific OS-related notes
 
+### Windows 
+
 If you are installing Docker for Windows, you may need to install the Windows Subsystem for Linux (WSL). You will either be told to do so or you might encounter an error related to "WSL kernel version too low" or similar. In either case you will need to run cmd.exe and the following commands:
 
 	wsl --install
 	wsl --update
+
+If you receive an "Unexpected WSL error" from Docker Desktop you may be able to resolve it by checking that virtualisation is enabled in your system BIOS. This can usually be accessed at startup via a specific key (e.g., F2) - depending on your machine.
+
+
+### macOS
 
 If you are installing Docker for macOS, some have encountered errors where Docker Desktop won't start. In which case try some of the following:
 
