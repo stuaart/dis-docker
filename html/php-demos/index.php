@@ -22,6 +22,7 @@
 				<li><a href="demo9.php">Demo 9</a> - File i/o (reading) and playing with encodings</li>
 				<li><a href="demo10.php">Demo 10</a> - File i/o (writing)</li>
 				<li><a href="demo11.php">Demo 11</a> - Exceptions</li>
+				<li><a href="demo15.php">Demo 15</a> - Login example</li>
 			</ul>
 			<hr/>
 			<h1>Mixing and matching things</h1>

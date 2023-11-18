@@ -23,13 +23,24 @@ USE `phpdemos`;
 
 -- --------------------------------------------------------
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+INSERT INTO `users` (`username`, `password`) VALUES
+('stuart', 'password1');
+
+
 --
 -- Table structure for table `people`
 --
 
 DROP TABLE IF EXISTS `People`;
 CREATE TABLE IF NOT EXISTS `People` (
-  `ID` int NOT NULL AUTO_INCREMENT,
+  `ID` int PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   `PhoneNumber` varchar(12) DEFAULT NULL,
   `Address` varchar(60) DEFAULT NULL,

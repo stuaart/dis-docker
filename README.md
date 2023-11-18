@@ -45,6 +45,15 @@ If for whatever reason you want to delete your database and rebuild from the SQL
 again.
 
 
+## Where is my Docker running from?
+
+If you have trouble getting pages to load in your browser it may be that you have more than one Docker folder. You can check what part of your filesystem your containers are mapped to with the following command:
+
+    docker inspect -f '{{ .Mounts }}'  <your-container-id-or-name>
+
+You can find your container id (e.g., the apache one) in Docker Desktop - it's a string of numbers and letters.
+
+
 ## Specific OS-related notes
 
 ### Windows 
