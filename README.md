@@ -53,6 +53,8 @@ If you have trouble getting pages to load in your browser it may be that you hav
 
 You can find your container id (e.g., the apache one) in Docker Desktop - it's a string of numbers and letters.
 
+You can also locate the equivalent information in the Docker Desktop interface if you click on your main container - the info should be displayed near the top of the window.
+
 
 ## Specific OS-related notes
 
