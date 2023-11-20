@@ -49,7 +49,7 @@ again.
 
 If you have trouble getting pages to load in your browser it may be that you have more than one Docker folder. You can check what part of your filesystem your containers are mapped to with the following command:
 
-    docker inspect -f '{{ .Mounts }}'  <your-container-id-or-name>
+    docker inspect -f "{{ .Mounts }}"  <your-container-id-or-name>
 
 You can find your container id (e.g., the apache one) in Docker Desktop - it's a string of numbers and letters.
 
