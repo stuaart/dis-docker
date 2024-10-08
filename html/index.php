@@ -5,6 +5,10 @@
 	</head>
 	<body>	
 		<main>
+			<h1>PHPMyAdmin (SQL management tool)</h1>
+			<a href="http://localhost:8081/">PHPMyAdmin</a>
+
+
 			<h1>Sample code / demos and exercise-related code</h1>
 			<ul>
 				<li>
