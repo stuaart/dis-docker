@@ -29,6 +29,8 @@ You can now point a browser at the following locations:
 
 html/ - all your HTML, PHP, CSS, JS etc. files go here (note that this dir includes example code from the module which you can use without citation in your coursework)
 
+html/cw2/ - this is where you should put your Coursework 2 files
+
 mariadb/ - SQL files that are used to build the database when Docker starts; this includes the initial database for Coursework 2 which you will probably want to modify, as well as the database for the example code (phpdemos); also contains instructions to build the mariadb image
 
 mariadb-data/ - this is where the mariadb Docker container's database stores its files; if you want to rebuild your databases from scratch, see below for instructions

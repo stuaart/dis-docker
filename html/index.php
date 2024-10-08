@@ -1,11 +1,11 @@
 <html>
 	<head>
-		<title>COMP4039 - Sample code</title>
+		<title>COMP4039</title>
 		<link rel="stylesheet" href="css/mvp.css">
 	</head>
 	<body>	
 		<main>
-			<h1>Basic features of the language</h1>
+			<h1>Sample code / demos and exercise-related code</h1>
 			<ul>
 				<li>
 					<a href="php-demos/index.php">PHP demos</a>
@@ -17,6 +17,10 @@
 					<a href="js-demos/index.html">Javascript demos</a>
 				</li>
 			</ul>
+
+			<h1>Coursework 2</h1>
+			<a href="cw2/index.php">Coursework 2 start page</a>
+
 			<hr/>
 			<?php phpinfo();?>
 		</main>
