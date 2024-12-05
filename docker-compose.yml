@@ -1,5 +1,6 @@
 # LAMP docker compose file for COMP4039-DIS Coursework 2
-version: '3'
+# The 'version' field is no longer required in Docker Compose files version 3.9 and above. see https://docs.docker.com/reference/compose-file/version-and-name/#version-top-level-element-obsolete.
+# version: '3'
 
 services:
   php-apache:
